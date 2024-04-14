@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Udemy Certificate Generator</title>
+    <style>
+      /* Certificate Designing */
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #course-name {
+        font-family: " Arno Pro Display ", "Times New Roman", Times, serif;
+        /* src: url("../font/ArnoPro-BoldDisplay.otf"); */
+        font-weight: bold;
+        font-size: 80px;
+        margin-top: 12px;
+        color: rgb(28, 28, 28);
+      }
+
+      #certificate {
+        display: none;
+        flex-direction: column;
+        padding: 60px;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        height: fit-content;
+        width: 1280px;
+        /* background-color: rgba(200, 194, 194, 0.073); */
+      }
+
+      .container {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #dbdbdbc3;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        width: auto;
+      }
+
+      .right-side {
+        font-size: 14px;
+        font-family: "DistrictProW01-Medium", sans-serif;
+        color: rgba(107, 107, 107, 0.879);
+        text-align: right;
+        padding-left: 620px;
+      }
+      .right-side > div {
+        margin-top: 10px;
+      }
+      #udemy-logo {
+        height: 120px;
+      }
+
+      .content {
+        font-family: "Montserrat", sans-serif;
+        font-weight: bolder;
+        margin-top: 70px;
+      }
+
+      .content > h4,
+      .user > h4 {
+        font-family: "DistrictProW01-Medium", sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        margin-top: 18px;
+      }
+
+      .content > h3 {
+        color: rgba(100, 100, 100, 0.899);
+        letter-spacing: 1.5px;
+      }
+
+      .content > h1 {
+        margin: 0;
+      }
+
+      .content > h4 > b,
+      .user > h4 > b {
+        font-family: "Poppins", sans-serif;
+        color: rgb(28, 28, 28);
+        font-size: 20px;
+      }
+
+      .user > h1 {
+        font-size: 42px;
+        font-family: "Poppins", sans-serif;
+        color: rgb(28, 28, 28);
+        font-weight: bolder;
+      }
+
+      .user {
+        margin-top: 170px;
+      }
+
+      .user > h4 {
+        margin: 0;
+      }
+
+      #download {
+        margin-top: 20px;
+        display: none;
+      }
+
+      .btn {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+      }
+
+      #Generate,
+      #download {
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-family: "Montserrat", sans-serif;
+        width: 250px;
+        background-color: rgba(0, 0, 255, 0.496);
+        height: 50px;
+        transition: all 0.3s;
+      }
+
+      #Generate:hover,
+      #download:hover {
+        background-color: rgba(0, 0, 255, 0.694);
+      }
+
+      .alert > strong {
+        color: red;
+        background-color: transparent;
+      }
+      .alert-warning {
+        --bs-alert-color: #664d03;
+        --bs-alert-bg: #fff3cdb5;
+        --bs-alert-border-color: #ffecb500;
+      }
+
+      /* Media Queries */
+
+      @media (max-width: 500px) {
+        #form {
+          font-size: 14px;
+          padding: 22px;
+        }
+        input {
+          font-size: 12px;
+        }
+        #download {
+          font-size: 40px;
+          height: 165px;
+        }
+      }
+
+      /* Here Comes the form's designing */
+
+      #form {
+        padding: 50px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.16) 0px 30px 60px -30px;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 10px;
+        font-size: 20px;
+        background-color: white;
+      }
+
+      .first-name,
+      .last-name,
+      .date,
+      .length,
+      .course,
+      .teacher {
+        margin-top: 30px;
+      }
+
+      #course {
+        margin-top: 15px;
+        font-size: 20px;
+        font-family: sans-serif;
+        padding: 10px;
+        border: 1px solid rgba(128, 128, 128, 0.563);
+        outline: none;
+      }
+
+      label {
+        margin-top: 25px;
+      }
+
+      input {
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        width: 300px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.563);
+      }
+    </style>
+
+    <!-- Font -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <form action="#" id="form">
+        <div class="first-name">
+          <label for="fname">
+            First Name: <br />
+            <input type="text" name="fname" id="fname" required />
+          </label>
+        </div>
+        <div class="last-name">
+          <label for="lname">
+            Last Name: <br />
+            <input type="text" name="lname" id="lname" required />
+          </label>
+        </div>
+        <div class="date">
+          <label for="date">
+            Date of Completion: <br />
+            <input
+              type="text"
+              name="date"
+              id="date"
+              placeholder="Example: Jan. 25, 2000"
+              required
+            />
+          </label>
+        </div>
+        <div class="length">
+          <label for="length">
+            Length of Course: <br />
+            <input type="number" name="length" id="length" required />
+          </label>
+        </div>
+        <div class="course">
+          <label for="course">Course Name:</label>
+          <br />
+          <textarea
+            name="course"
+            id="course"
+            rows="2"
+            cols="28"
+            required
+          ></textarea>
+        </div>
+
+        <div class="teacher">
+          <label for="teacher">
+            Instructor's Name: <br />
+            <input type="text" name="teacher" id="teacher" required />
+          </label>
+        </div>
+        <div class="btn">
+          <button id="Generate" type="submit">Generate</button>
+        </div>
+      </form>
+
+      <div id="certificate">
+        <!-- <div class="logo">
+                <img id="udemy-logo" src="img/udemy-logo.png" alt="">
+                <div class="right-side">
+                    <div class="c-no">Certificate no: </div>
+                    <div class="c-url">Certificate url: ude.my/</div>
+                    <div class="ref-no"></div>
+                </div>
+            </div>
+            <div class="content">
+                <h3>CERTIFICATE OF COMPLETION</h3>
+                <h1 id="course-name">JavaScript - Basics to Advanced</h1>
+                <h4>Instructors &nbsp;&nbsp;<b>Bhuvan Bam</b></h4>
+            </div>
+            <div class="user">
+                <h1 id="name">Shubhojeet Bera</h1>
+                <h4>Date &nbsp;<b>April 29, 20222</b></h4>
+                <h4>Length &nbsp;<b>4 total hours</b></h4>
+            </div> -->
+      </div>
+      <button id="download">Download PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+      // Variables Declarations
+      let fname = document.getElementById("fname");
+      let lname = document.getElementById("lname");
+      let date = document.getElementById("date");
+      let length = document.getElementById("length");
+      let course = document.getElementById("course");
+      let teacher = document.getElementById("teacher");
+      let instruct = "Instructors";
+      let form = document.getElementById("form");
+      let container = document.querySelector(".container");
+
+      let certificate_no = "UC-3308c41b-93cb-485a-9ee3-450729f8ef73";
+
+      // Random Number Generation for Certificate Number & Reference Number
+      a = 400000; //Min value
+      b = 485000; //Max Value
+      let rand = a + (b - 1) * Math.random(); //Main Formula
+      let rand2 = Math.round(rand);
+
+      c = 30; //Min value
+      d = 90; //Max Value
+      let rand3 = c + (d - 1) * Math.random(); //Main Formula
+      let rand4 = Math.round(rand3);
+
+      e = 1; //Min value
+      f = 9; //Max Value
+      let rand5 = e + (f - 1) * Math.random(); //Main Formula
+      let rand6 = Math.round(rand5);
+
+      // Main Code Starts Here
+      let generate = document.getElementById("Generate");
+      generate.addEventListener("click", (e) => {
+        e.preventDefault();
+        let first_name = fname.value;
+        let last_name = lname.value;
+        let Date = date.value;
+        let c_length = length.value;
+        let course_name = course.value.replace(/\n/g, "<br>");
+        let instructor = teacher.value;
+
+        if (
+          first_name === "" ||
+          last_name === "" ||
+          Date === "" ||
+          c_length === "" ||
+          course_name === "" ||
+          instructor === ""
+        ) {
+          alert("Input fields can't be empty.");
+        } else {
+          if (instructor.includes(",")) {
+            instruct = "Instructors";
+          }
+          fname.value = "";
+          lname.value = "";
+          course.value = "";
+          date.value = "";
+          teacher.value = "";
+          length.value = "";
+
+          form.style.display = "none";
+          container.style.backgroundColor = "white";
+          container.style.height = "auto";
+
+          let certificate = document.getElementById("certificate");
+          certificate.style.backgroundColor = "#f8f9fb";
+          certificate.style.display = "flex";
+          certificate.innerHTML = `<div class="logo">
+    <img id="udemy-logo" src="../img/udemy-logo.png" alt="">
+    <div class="right-side">
+                      <div class="c-no">Certificate no: UC-3308c41b-93cb-485a-9ee3-${rand2}f8ef${rand4}</div>
+                      <div class="c-url">Certificate url: ude.my/UC-3308c41b-93cb-485a-9ee3-${rand2}f8ef${rand4}</div>
+                      <div class="ref-no">Reference Number: 000${rand6}</div>
+                  </div>
+  </div>
+  <div class="content">
+    <h3>CERTIFICATE OF COMPLETION</h3>
+    <h1 id="course-name">${course_name}</h1>
+    <h4>${instruct}&nbsp;<b>${instructor}</b></h4>
+  </div>
+  <div class="user">
+    <h1 id="name">${first_name} ${last_name}</h1>
+    <h4>Date &nbsp;<b>${Date}</b></h4>
+    <h4>Length &nbsp;<b>${c_length} total hours</b></h4>
+  </div>
+  `;
+          document.getElementById("download").style.display = "block";
+        }
+      });
+
+      //Download PDF
+
+      let download = document.getElementById("download");
+      download.addEventListener("click", () => {
+        var opt = {
+          margin: 1,
+          filename: `Udemy-certificate.pdf`,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "px", format: "c2", orientation: "landscape" },
+        };
+
+        html2pdf().set(opt).from(certificate).save();
+      });
+    </script>
+    <script>
+      // Check if the site is opened on a mobile device
+      function isMobileDevice() {
+        return (
+          typeof window.orientation !== "undefined" ||
+          navigator.userAgent.indexOf("IEMobile") !== -1
+        );
+      }
+
+      // Show alert if the site is opened on a mobile device
+      if (isMobileDevice()) {
+        alert("This site is best viewed on a desktop or laptop.");
+      }
+    </script>
+  </body>
+</html>

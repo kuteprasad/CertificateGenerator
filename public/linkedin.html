@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn Learning Certificate Generator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .main-content {
+        display: flex;
+        flex-flow: row nowrap;
+        height: 740px;
+        width: inherit;
+        border: 6px solid rgb(177, 177, 177);
+      }
+
+      #certificate {
+        display: none;
+        width: 1180px;
+        height: inherit;
+        background-color: white;
+      }
+      .left-side {
+        width: 25%;
+      }
+
+      .container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .left-side > img {
+        height: 740px;
+      }
+      .outer {
+        border: 20px solid white;
+      }
+      .light-br {
+        border: 3px solid rgba(177, 177, 177, 0.746);
+        padding: 4px;
+      }
+      .dark-br {
+        border: 15px solid rgba(135, 135, 135, 0.81);
+        padding: 8px;
+      }
+      .right-content {
+        margin-top: 90px;
+        margin-left: 20px;
+        width: 62%;
+        font-family: "Lato", sans-serif;
+        font-size: 18px;
+        color: #737373;
+        font-weight: 300;
+      }
+
+      #logo {
+        height: 24px;
+        margin-left: 9px;
+      }
+      #sign {
+        height: 67px;
+      }
+
+      .congrats,
+      .course-name,
+      .para,
+      .authority,
+      .certificate-id {
+        margin-left: 40px;
+      }
+
+      .congrats > h3 {
+        font-size: 23px;
+        font-weight: 300;
+        margin-top: 0px;
+      }
+
+      .congrats > h2 {
+        font-weight: 300;
+        margin-top: 3px;
+        margin-bottom: 0px;
+      }
+      .course-name {
+        color: #6e6f6e;
+        margin-top: 45px;
+      }
+      .course-name > h1 {
+        margin: 0;
+      }
+      .completion {
+        display: flex;
+        align-items: center;
+        color: #707071;
+      }
+      .completion > h3 {
+        margin-top: 5px;
+        margin-bottom: 0px;
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      .para > h2 {
+        margin-top: 30px;
+        color: #707071;
+        font-size: 17px;
+        font-weight: 400;
+      }
+      .authority {
+        margin-top: 15px;
+        font-size: 12.6px;
+
+        font-weight: 300;
+        display: flex;
+        color: #707071;
+        align-items: flex-end;
+      }
+
+      .vl {
+        border: 1px solid #d0d0d1;
+        height: 70px;
+      }
+
+      .part-1 > h3,
+      .part-2 > h3 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 500;
+      }
+      .certificate-id {
+        margin-top: 140px;
+        font-size: 13px;
+      }
+
+      #clength {
+        margin-left: 11px;
+      }
+
+      /* Form's Designing */
+
+      #form {
+        padding: 50px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.16) 0px 30px 60px -30px;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 10px;
+        font-size: 20px;
+        background-color: white;
+      }
+
+      .first-name,
+      .last-name,
+      .date,
+      .length,
+      .course,
+      .teacher {
+        margin-top: 30px;
+      }
+
+      label {
+        margin-top: 25px;
+      }
+
+      input {
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        width: 300px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.563);
+      }
+      #Generate,
+      #download {
+        cursor: pointer;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-family: "Montserrat", sans-serif;
+        width: 250px;
+        background-color: rgba(0, 0, 255, 0.496);
+        height: 50px;
+        transition: all 0.3s;
+      }
+      .btn {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #dbdbdbc3;
+      }
+      #download {
+        display: none;
+      }
+
+      #Generate:hover,
+      #download:hover {
+        background-color: rgba(0, 0, 255, 0.694);
+      }
+      /* Media Queries */
+
+      @media (max-width: 500px) {
+        #form {
+          font-size: 14px;
+          padding: 22px;
+        }
+        input {
+          font-size: 12px;
+        }
+        #download {
+          font-size: 40px;
+          height: 165px;
+        }
+      }
+    </style>
+    <!-- Font -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <form action="#" id="form">
+        <div class="first-name">
+          <label for="fname">
+            First Name: <br />
+            <input type="text" name="fname" id="fname" />
+          </label>
+        </div>
+        <div class="last-name">
+          <label for="lname">
+            Last Name: <br />
+            <input type="text" name="lname" id="lname" />
+          </label>
+        </div>
+        <div class="date">
+          <label for="date">
+            Date of Completion: <br />
+            <input
+              type="text"
+              name="date"
+              id="date"
+              placeholder="Example: Jan 25, 2000"
+            />
+          </label>
+        </div>
+        <div class="length">
+          <label for="length">
+            Length of Course: <br />
+            <input
+              type="text"
+              name="length"
+              id="length"
+              placeholder="Example: 1 hour 30 minutes"
+            />
+          </label>
+        </div>
+        <div class="course">
+          <label for="course">
+            Course Name: <br />
+            <input type="text" name="course" id="course" />
+          </label>
+        </div>
+        <div class="btn">
+          <button id="Generate" type="submit">Generate</button>
+        </div>
+      </form>
+
+      <div id="certificate">
+        <!-- <div class="outer">
+                <div class="light-br">
+                    <div class="dark-br">
+                        <div class="main-content">
+                            <div class="left-side">
+                                <img src="img/LinkedIn left-2.png" alt="">
+                            </div>
+                            <div class="right-content">
+                                <div class="logo">
+                                    <img id="logo" src="img/Learning.png" alt="">
+                                </div>
+                                <div class="congrats">
+                                    <h2>Certificate of Completion</h2>
+                                    <h3>Congratulations, Shubhojeet Bera</h3>
+                                </div>
+                                <div class="course-name">
+                                    <h1>MySQL Installation and Certification</h1>
+                                    <div class="completion">
+                                        <h3>Course completed on Sep 25, 2000 </h3>
+                                        <li>1 hour 41 minutes</li>
+                                    </div>
+                                </div>
+                                <div class="para">
+                                    <h2>By continuing to learn, you have expanded your perspective, sharpened your
+                                        skills, and made yourself even more in demand.</h2>
+                                </div>
+                                <div class="authority">
+                                    <div class="part-1">
+                                        <img id="sign" src="img/Sign2.JPG" alt="">
+                                        <h3>VP, Learning Content at LinkedIn</h3>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div
+                                        class="vl"></div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div
+                                        class="part-2">
+                                        <h3>LinkedIn Learning</h3>
+                                        <h3>1000 W Maude Ave</h3>
+                                        <h3>Sunnyvale, CA 94085</h3>
+                                    </div>
+                                </div>
+                                <div class="certificate-id">Certificate Id: AU3IZ5a5rPeUmO_IE8R80L3ac5sN</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+      </div>
+      <button id="download">Download PDF</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+      let fname = document.getElementById("fname");
+      let lname = document.getElementById("lname");
+      let date = document.getElementById("date");
+      let length = document.getElementById("length");
+      let course = document.getElementById("course");
+      let form = document.getElementById("form");
+      let container = document.querySelector(".container");
+
+      let generate = document.getElementById("Generate");
+      generate.addEventListener("click", (e) => {
+        let first_name = fname.value;
+        let last_name = lname.value;
+        let Date = date.value;
+        let c_length = length.value;
+        let course_name = course.value;
+        e.preventDefault();
+        fname.value = "";
+        lname.value = "";
+        course.value = "";
+        date.value = "";
+        length.value = "";
+
+        form.style.display = "none";
+        container.style.backgroundColor = "white";
+
+        //Random Digits
+        a = 1; //Min value
+        b = 9; //Max Value
+        let rand = a + (b - 1) * Math.random(); //Main Formula
+        let rand2 = Math.round(rand);
+        c = 1; //Min value
+        d = 9; //Max Value
+        let rand3 = c + (d - 1) * Math.random(); //Main Formula
+        let rand4 = Math.round(rand3);
+
+        let certificate = document.getElementById("certificate");
+        certificate.style.display = "block";
+        certificate.innerHTML = `<div class="outer">
+  <div class="light-br">
+      <div class="dark-br">
+          <div class="main-content">
+              <div class="left-side">
+                  <img src="../img/LinkedIn left-2.png" alt="">
+              </div>
+              <div class="right-content">
+                  <div class="logo">
+                      <img id="logo" src="../img/Learning.png" alt="">
+                  </div>
+                  <div class="congrats">
+                      <h2>Certificate of Completion</h2>
+                      <h3>Congratulations, ${first_name} ${last_name}</h3>
+                  </div>
+                  <div class="course-name">
+                      <h1>${course_name}</h1>
+                      <div class="completion">
+                          <h3>Course completed on ${Date}</h3>
+                          <h3 id="clength">•&nbsp;&nbsp;${c_length}</h3>
+                      </div>
+                  </div>
+                  <div class="para">
+                      <h2>By continuing to learn, you have expanded your perspective, sharpened your
+                          skills, and made yourself even more in demand.</h2>
+                  </div>
+                  <div class="authority">
+                      <div class="part-1">
+                          <img id="sign" src="../img/Sign2.JPG" alt="">
+                          <h3>VP, Learning Content at LinkedIn</h3>
+                      </div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div
+                          class="vl"></div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div
+                          class="part-2">
+                          <h3>LinkedIn Learning</h3>
+                          <h3>1000 W Maude Ave</h3>
+                          <h3>Sunnyvale, CA 94085</h3>
+                      </div>
+                  </div>
+                  <div class="certificate-id">Certificate Id: AU${rand4}IZ${rand2}a${rand2}rPeUmO_IE${rand4}R${rand4}0L${rand4}ac${rand2}sN</div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>`;
+        document.getElementById("download").style.display = "block";
+      });
+
+      //Download PDF
+
+      let download = document.getElementById("download");
+      download.addEventListener("click", () => {
+        var opt = {
+          margin: 1,
+          filename: "LinkedIn-certificate.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "px", format: "a2", orientation: "landscape" },
+        };
+
+        html2pdf().set(opt).from(certificate).save();
+      });
+    </script>
+  </body>
+</html>
